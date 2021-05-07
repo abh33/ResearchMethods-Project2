@@ -8,30 +8,34 @@ import time
 
 if __name__=="__main__":
 
-    filename = "Segmentation_Paging.xlsx"
-    totalnum = 69
+    filename = "Java_Programming.xlsx"
+    totalnum = 52
     
     total_dataframe = methods.consolidate_sample_sheets(filename, range(1, totalnum+1))  
     total_dataframe = methods.running_average_two_rows(total_dataframe)
     net_dataframe_percent = methods.calculate_net_percentages(total_dataframe, totalnum)
     print(net_dataframe_percent)
 
-    fig, axs = plt.subplots(figsize=(6.0, 4.0))
-    net_dataframe_percent.plot('Timestamp', ['Net Engagement', 'Net Difficulty'], ax=axs)
-    # plt.show()              
-    fig.savefig("plot69.png")
+    fig, (axs1, axs2) = plt.subplots(1, 2, figsize=(12.0, 4.0))
+    axs1.set_ylim([-20, 40])
+    axs2.set_ylim([-20, 40])
+    net_dataframe_percent.plot('Timestamp', ['Net Engagement'], ax=axs1)
+    net_dataframe_percent.plot('Timestamp', ['Net Difficulty'], ax=axs2)
+    # net_dataframe_percent.plot('Timestamp', ['Net Engagement', 'Net Difficulty'], ax=axs)
+    plt.show()              
+    fig.savefig("plot52_2.png")
 
     
     
-    # combined_sample_data_frame = pd.DataFrame(columns=['Timestamp', 'Net Engagement', 'Net Difficulty'])
-    # engagement_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 49))})
-    # difficulty_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 49))})
+    combined_sample_data_frame = pd.DataFrame(columns=['Timestamp', 'Net Engagement', 'Net Difficulty'])
+    engagement_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 49))})
+    difficulty_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 49))})
     SSE_dataframe = pd.DataFrame(columns=('number_of_samples', 'net_engagement_sse', 'net_difficulty_sse'))
-    number_of_iterations = 100
+    number_of_iterations = 40
 
     time_initial = time.time()
 
-    for samplenum in range(10,11, 5):
+    for samplenum in range(15,52, 5):
         engagement_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 9))})
         difficulty_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 9))})
         average_sse_engagement, average_sse_difficulty = 0, 0
@@ -56,6 +60,8 @@ if __name__=="__main__":
         average_sse_engagement = int(average_sse_engagement/number_of_iterations)
         
         fig, (axs1, axs2) = plt.subplots(1, 2, figsize=(12.0, 4.0))
+        axs1.set_ylim([-25, 50])
+        axs2.set_ylim([-25, 50])
         cols1 = list(engagement_data_frame_compare.columns)
         cols2 = list(difficulty_data_frame_compare.columns)
         cols1.pop(0); cols2.pop(0)
@@ -66,10 +72,10 @@ if __name__=="__main__":
         fig.text(0.245,0.90,"Average SSE =" + str(average_sse_engagement))
         fig.text(0.665,0.90,"Average SSE =" + str(average_sse_difficulty))
         # plt.show()
-        fig.savefig("Figure_" + str(samplenum) + ".png")
+        fig.savefig("Figure52_" + str(samplenum) + ".png")
         plt.close(fig)
     print(SSE_dataframe)
-    fig, (axs1, axs2) = plt.subplots(1, 2, figsize=(12.0, 4.0))
+    fig, (axs1, axs2) = plt.subplots(1, 2, figsize=(20.0, 4.0))
     SSE_dataframe.boxplot(by='number_of_samples', column=['net_engagement_sse', 'net_difficulty_sse'])
     # SSE_dataframe.plot.box(x = 'number_of_samples', y = 'net_difficulty_sse', ax=axs2, by='number_of_samples')
     plt.show()

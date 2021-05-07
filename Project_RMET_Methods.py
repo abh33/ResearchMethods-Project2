@@ -40,7 +40,7 @@ def running_average_two_rows(data_frame):
 
 def calculate_net_percentages(sample_dataframe, number_of_sheets):
     number_of_rows = len(sample_dataframe.index)
-    dict_temp = {'Timestamp': list(range(1, number_of_rows+1)), 'Net Engagement':[0]*number_of_rows, 'Net Difficulty':[0]*number_of_rows}
+    dict_temp = {'Timestamp': list(range(0, number_of_rows)), 'Net Engagement':[0]*(number_of_rows), 'Net Difficulty':[0]*(number_of_rows)}
     net_value_data_frame = pd.DataFrame(dict_temp)
     net_value_data_frame['Net Engagement'] = sample_dataframe['Engaging'] - sample_dataframe['Boring']
     net_value_data_frame['Net Difficulty'] = sample_dataframe['Difficult'] - sample_dataframe['Easy']
@@ -51,7 +51,8 @@ def calculate_net_percentages(sample_dataframe, number_of_sheets):
     return net_value_data_frame
 
 def calculateSSE(net_value_percent_population, net_value_percent_sample):
-    dict_temp = {'Timestamp': list(range(1, 9)), 'Net Engagement':[0]*8, 'Net Difficulty':[0]*8}
+    number_of_rows = len(net_value_percent_sample.index)
+    dict_temp = {'Timestamp': list(range(0, number_of_rows)), 'Net Engagement':[0]*(number_of_rows), 'Net Difficulty':[0]*(number_of_rows)}
     error_data_frame = pd.DataFrame(dict_temp)
     error_data_frame['Net Engagement'] = net_value_percent_population['Net Engagement'] - net_value_percent_sample['Net Engagement']
     error_data_frame['Net Difficulty'] = net_value_percent_population['Net Difficulty'] - net_value_percent_sample['Net Difficulty']
