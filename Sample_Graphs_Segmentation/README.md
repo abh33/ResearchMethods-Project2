@@ -1,10 +1,16 @@
-### **DEBE Breakdown occurs at n = 25 to n = 30**
+### **DEBE Breakdown occurs at n = 30 to n = 40**
 
-![Combined](Combined_Java.png)
+![Combined](Combined_Segmentation.png)
 
 <centre>Combined Plot</centre>
 
+**n = 65**
 
+![n=65](65.png)**n = 60**
+
+![n=60](60.png)**n = 55**
+
+![n=55](55.png)
 
 **n = 50**
 
@@ -42,5 +48,5 @@
 
 **SSE Box Plot**
 
-![Box Plot](Boxplot_Java.png)
+![Box Plot](Boxplot_Segmentation.png)
 
