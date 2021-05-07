@@ -36,8 +36,8 @@ if __name__=="__main__":
     time_initial = time.time()
 
     for samplenum in range(15,52, 5):
-        engagement_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 9))})
-        difficulty_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 9))})
+        engagement_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 31))})
+        difficulty_data_frame_compare = pd.DataFrame({'Timestamp': list(range(1, 31))})
         average_sse_engagement, average_sse_difficulty = 0, 0
         
         for i in range(number_of_iterations):
@@ -71,7 +71,7 @@ if __name__=="__main__":
         fig.text(0.65,0.94,"Number of Samples =" + str(samplenum))
         fig.text(0.245,0.90,"Average SSE =" + str(average_sse_engagement))
         fig.text(0.665,0.90,"Average SSE =" + str(average_sse_difficulty))
-        # plt.show()
+        plt.show()
         fig.savefig("Figure52_" + str(samplenum) + ".png")
         plt.close(fig)
     print(SSE_dataframe)
